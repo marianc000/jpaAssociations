@@ -6,11 +6,7 @@
              version="3.1">
     <persistence-unit name="EmployeeService" transaction-type="RESOURCE_LOCAL">
            
-        <class>query.model.Post</class>
-        <class>query.model.Country</class>
-        <class>query.model.EagerCountry</class> 
-        <class>query.model.EagerAuthor</class> 
-        <class>query.model.Author</class>
+ 
         <shared-cache-mode>NONE</shared-cache-mode>
         <validation-mode>NONE</validation-mode>
      

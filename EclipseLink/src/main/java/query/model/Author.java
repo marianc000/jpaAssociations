@@ -2,7 +2,7 @@ package query.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
@@ -16,14 +16,11 @@ public class Author implements GetPosts {
     @Id
     private int id;
     private String name;
-
-    //  @OneToMany(mappedBy = "department",fetch = FetchType.EAGER)
-    @OneToMany(mappedBy = "author")
+ 
+    @OneToMany
+    @JoinColumn(name = "AUTHOR_ID")
     private List< Post> posts = new LinkedList<>();
-
-    @ManyToOne
-    private Country country;
-
+ 
     public Author() {
 
     }
@@ -40,10 +37,6 @@ public class Author implements GetPosts {
         return posts;
     }
 
-    public Country getCountry() {
-        return country;
-    }
-
     @Override
     public boolean equals(Object o) {
         Author other = (Author) o;
@@ -57,6 +50,6 @@ public class Author implements GetPosts {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name + ", posts=" + posts.size() + ", country=" + country + '}';
+        return "Author{" + "id=" + id + ", name=" + name + ", posts=" + posts.size() + '}';
     }
 }

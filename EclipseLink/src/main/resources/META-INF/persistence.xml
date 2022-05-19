@@ -8,8 +8,6 @@
            
         <class>query.model.Post</class>
         <class>query.model.Country</class>
-        <class>query.model.EagerCountry</class> 
-        <class>query.model.EagerAuthor</class> 
         <class>query.model.Author</class>
         <shared-cache-mode>NONE</shared-cache-mode>
         <validation-mode>NONE</validation-mode>
@@ -24,8 +22,8 @@
            
             <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
             <property name="jakarta.persistence.schema-generation.drop-source" value="script"/>
-            <property name="jakarta.persistence.schema-generation.create-script-source" value="src/main/resources/create.sql"/>
-            <property name="jakarta.persistence.schema-generation.drop-script-source" value="src/main/resources/drop.sql"/>
+            <property name="jakarta.persistence.schema-generation.create-script-source" value="create.sql"/>
+            <property name="jakarta.persistence.schema-generation.drop-script-source" value="drop.sql"/>
   
             <property name="jakarta.persistence.sql-load-script-source" value="db.sql" />
      
@@ -37,10 +35,9 @@
             <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="src/main/resources/drop.sql" />
             <property name="jakarta.persistence.schema-generation.scripts.create-target" value="src/main/resources/create.sql" />
             -->
-            <property name="hibernate.show_sql" value="true" />
+            <property name="eclipselink.logging.level" value="FINE"/> 
         </properties>
        
         
     </persistence-unit>
 </persistence>
-  <!--<property name="eclipselink.logging.level" value="FINE"/>-->
