@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.1">
+    <persistence-unit name="EmployeeService" transaction-type="RESOURCE_LOCAL">
+           
+        <class>query.model.Post</class>
+        <class>query.model.Country</class>
+        <class>query.model.EagerCountry</class> 
+        <class>query.model.EagerAuthor</class> 
+        <class>query.model.Author</class>
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <validation-mode>NONE</validation-mode>
+     
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:derby://localhost:1527/ch11_1;create=true;traceLevel=0"/>
+            <property name="jakarta.persistence.jdbc.user" value="APP"/>
+            <property name="jakarta.persistence.jdbc.password" value="APP"/>
+  
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+           
+            <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
+            <property name="jakarta.persistence.schema-generation.drop-source" value="script"/>
+            <property name="jakarta.persistence.schema-generation.create-script-source" value="src/main/resources/create.sql"/>
+            <property name="jakarta.persistence.schema-generation.drop-script-source" value="src/main/resources/drop.sql"/>
+  
+            <property name="jakarta.persistence.sql-load-script-source" value="db.sql" />
+     
+            
+            <!--works-->
+            
+            <!--            <property name="hibernate.hbm2ddl.schema-generation.script.append" value="false" />
+            <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create" />
+            <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="src/main/resources/drop.sql" />
+            <property name="jakarta.persistence.schema-generation.scripts.create-target" value="src/main/resources/create.sql" />
+            -->
+            <property name="hibernate.show_sql" value="true" />
+        </properties>
+       
+        
+    </persistence-unit>
+</persistence>
+  <!--<property name="eclipselink.logging.level" value="FINE"/>-->
