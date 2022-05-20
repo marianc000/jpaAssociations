@@ -1,15 +1,9 @@
 package query.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityResult;
-import jakarta.persistence.FieldResult;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.NamedAttributeNode;
-import jakarta.persistence.NamedEntityGraph;
-import jakarta.persistence.NamedSubgraph;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.SqlResultSetMapping;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;

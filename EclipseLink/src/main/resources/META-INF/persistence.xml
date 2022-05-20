@@ -36,6 +36,11 @@
             <property name="jakarta.persistence.schema-generation.scripts.create-target" value="src/main/resources/create.sql" />
             -->
             <property name="eclipselink.logging.level" value="FINE"/> 
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.logging.session" value="false"/>
+            <property name="eclipselink.logging.thread" value="false"/> 
+            <property name="eclipselink.logging.timestamp" value="false"/>
+            <property name="eclipselink.logging.connection" value="false"/>
         </properties>
        
         
