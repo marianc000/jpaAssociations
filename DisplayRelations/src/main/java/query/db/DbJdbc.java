@@ -24,15 +24,15 @@ public class DbJdbc {
 
     static List<Country> load() throws SQLException {
         try ( Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/ch11_1;");  Statement st = con.createStatement();  ResultSet rs = st
-                .executeQuery("SELECT c.ID, c.NAME, a.ID, a.NAME, p.ID, p.NAME FROM COUNTRY c"
+                .executeQuery("SELECT  c.NAME,  a.NAME,  p.NAME FROM COUNTRY c"
                         + " LEFT OUTER JOIN AUTHOR a ON (a.COUNTRY_ID = c.ID) LEFT OUTER JOIN POST p ON (p.AUTHOR_ID = a.ID)"
                         + " order by c.name,a.name,p.name")) {
             List<Country> l = new LinkedList<>();
             while (rs.next()) {
-                Country c = new Country(rs.getInt(1), rs.getString(2));
-                Author a = new Author(rs.getInt(3), rs.getString(4));
+                Country c = new Country(rs.getString(1));
+                Author a = new Author(rs.getString(2));
                 c.getAuthors().add(a);
-                a.getPosts().add(new Post(rs.getInt(5), rs.getString(6)));
+                a.getPosts().add(new Post(rs.getString(3)));
                 l.add(c);
             }
             return l;
@@ -43,7 +43,7 @@ public class DbJdbc {
         printList(l);
         System.out.println("1=======================================");
         var m = l.stream()
-                .collect(groupingBy(c -> c.getId(), ()->new LinkedHashMap<>(),
+                .collect(groupingBy(c -> c.getName(), () -> new LinkedHashMap<>(),
                         reducing((a, b) -> {
                             a.getAuthors().addAll(b.getAuthors());
                             return a;
@@ -55,7 +55,7 @@ public class DbJdbc {
 
         l.forEach(c -> {
             var m2 = c.getAuthors().stream().
-                    collect(groupingBy(a -> a.getId(),()->new LinkedHashMap<>(), reducing((a, b) -> {
+                    collect(groupingBy(a -> a.getName(), () -> new LinkedHashMap<>(), reducing((a, b) -> {
                         a.getPosts().addAll(b.getPosts());
                         return a;
                     })));

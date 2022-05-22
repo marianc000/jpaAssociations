@@ -17,8 +17,12 @@ public class Post {
 
     }
 
-    public Post(int id, String name) {
-        this.id = id;
+//    public Post(int id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
+
+    public Post(String name) {
         this.name = name;
     }
 

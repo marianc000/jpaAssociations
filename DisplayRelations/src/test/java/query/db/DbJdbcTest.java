@@ -25,17 +25,17 @@ public class DbJdbcTest {
     //   @Test
     public void testload() throws SQLException {
         List<Country> l = i.load();
-        printList(l);
+     //   printList(l);
 
     }
 
     @Test
     public void testgroup() throws SQLException {
         List<Country> l = i.load();
-        printList(l);
-        System.out.println("=======================================");
+    //    printList(l);
+     
         l = i.group(l);
-        printList(l);
+  //      printList(l);
 
     }
 }
