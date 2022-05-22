@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -39,26 +40,30 @@ public class DbJdbc {
     }
 
     static List<Country> group(List<Country> l) {
-
+        printList(l);
+        System.out.println("1=======================================");
         var m = l.stream()
-                .collect(groupingBy(c -> c.getId(),
+                .collect(groupingBy(c -> c.getId(), ()->new LinkedHashMap<>(),
                         reducing((a, b) -> {
                             a.getAuthors().addAll(b.getAuthors());
                             return a;
                         })
                 ));
-
+        printList(l);
+        System.out.println("2=======================================");
         l = new LinkedList<>(m.values().stream().map(o -> o.get()).toList());
 
         l.forEach(c -> {
             var m2 = c.getAuthors().stream().
-                    collect(groupingBy(a -> a.getId(), reducing((a, b) -> {
+                    collect(groupingBy(a -> a.getId(),()->new LinkedHashMap<>(), reducing((a, b) -> {
                         a.getPosts().addAll(b.getPosts());
                         return a;
                     })));
             c.getAuthors().clear();
             c.getAuthors().addAll(m2.values().stream().map(o -> o.get()).toList());
         });
+        printList(l);
+        System.out.println("3=======================================");
 
         return l;
     }
@@ -66,5 +71,9 @@ public class DbJdbc {
     public static String getAllCountries2() throws SQLException {
         return group(load()).stream().map(c -> c.toString())
                 .collect(Collectors.joining(",", "[", "]"));
+    }
+
+    static void printList(List l) {
+        l.forEach(o -> System.out.println(o));
     }
 }
