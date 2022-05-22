@@ -1,17 +1,21 @@
-<%-- 
-    Document   : index
-    Created on : May 20, 2022, 10:49:41 PM
-    Author     : marian
---%>
+<%-- Document : index Created on : May 20, 2022, 10:49:41 PM Author : marian --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+    <%@page import="static query.db.Db.getAllCountries" %>
+        <%@page contentType="text/html" pageEncoding="UTF-8" %>
+            <!DOCTYPE html>
+            <html>
+
+            <head>
+                <link rel="stylesheet" href="css/styles.css">
+                <script>let data =<%=getAllCountries() %>;
+                    
+                </script>
+                <script src="js/main.js" type="module"></script>
+            </head>
+
+            <body>
+                <div id="rootDiv"></div>
+            </body>
+
+            </html>
