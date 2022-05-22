@@ -7,11 +7,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
- 
+import java.util.stream.Collectors;
+
 import query.model.access.GetAuthors;
 
 @Entity
- 
+
 @Table(name = "COUNTRY")
 public class Country implements GetAuthors {
 
@@ -41,7 +42,8 @@ public class Country implements GetAuthors {
 
     @Override
     public String toString() {
-        return "Country{" + "id=" + id + ", name=" + name + ", authors=" + authors.size() + '}';
+        return "{id:" + id + ", name: '" + name 
+                + "', authors: [" + authors.stream().map(a->a.toString()).collect(Collectors.joining(",")) + "]}";
     }
 
     @Override

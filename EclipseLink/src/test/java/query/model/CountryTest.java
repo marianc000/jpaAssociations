@@ -12,9 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.MethodName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import static query.db.Db.entityManager;
 
 import static query.model.CommonTest.accessFields;
-import static query.model.CommonTest.entityManager;
+ 
 
 @TestMethodOrder(MethodName.class)
 public class CountryTest {
@@ -36,5 +37,6 @@ public class CountryTest {
         List<Country> l = em.createQuery("SELECT c FROM Country c", Country.class)
                 .setHint("eclipselink.left-join-fetch", "c.authors.posts").getResultList();
         accessFields(l);
+        System.out.println(l.get(0));
     }
 }

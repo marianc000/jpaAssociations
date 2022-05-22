@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import query.model.access.GetPosts;
 
 @Entity
@@ -50,6 +51,7 @@ public class Author implements GetPosts {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name + ", posts=" + posts.size() + '}';
+        return  "{ id:" + id + ", name:'" + name + "', posts: [" 
+                + posts.stream().map(a->a.toString()).collect(Collectors.joining(",")) + "]}";
     }
 }
