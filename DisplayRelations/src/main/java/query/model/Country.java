@@ -28,14 +28,10 @@ public class Country implements GetAuthors {
 
     }
 
-    public Country(String name) {
+    public Country(int id, String name) {
+        this.id = id;
         this.name = name;
     }
-
-//    public Country(int id, String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
 
     public int getId() {
         return id;
@@ -47,6 +43,10 @@ public class Country implements GetAuthors {
 
     public List<Author> getAuthors() {
         return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 
     @Override

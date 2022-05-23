@@ -26,12 +26,8 @@ public class Author implements GetPosts {
 
     }
 
-//    public Author(int id, String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
-
-    public Author(String name) {
+    public Author(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
