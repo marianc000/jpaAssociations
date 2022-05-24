@@ -8,10 +8,7 @@ import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.reducing;
 import query.model.Author;
@@ -24,7 +21,7 @@ public class DbJdbc {
 //}
 
     static List<Country> load() throws SQLException {
-        try ( Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/ch11_1;");  Statement st = con.createStatement();  ResultSet rs = st
+        try ( Connection con = DriverManager.getConnection("jdbc:h2:mem:test");  Statement st = con.createStatement();  ResultSet rs = st
                 .executeQuery("SELECT c.ID, c.NAME, a.ID, a.NAME, p.ID, p.NAME FROM COUNTRY c"
                         + " LEFT OUTER JOIN AUTHOR a ON (a.COUNTRY_ID = c.ID) LEFT OUTER JOIN POST p ON (p.AUTHOR_ID = a.ID)"
                         + " order by c.name,a.name,p.name")) {
@@ -41,29 +38,24 @@ public class DbJdbc {
     }
 
     static List<Country> group(List<Country> l) {
-        printList(l);
-        System.out.println("1=======================================");
         var m = l.stream()
-                .collect(groupingBy(c -> c.getName(), () -> new LinkedHashMap<>(),
+                .collect(groupingBy(c -> c.getName(), LinkedHashMap::new,
                         reducing((a, b) -> {
                             a.getAuthors().addAll(b.getAuthors());
                             return a;
                         })
                 ));
-        printList(l);
-        System.out.println("2=======================================");
+
         l = new LinkedList<>(m.values().stream().map(o -> o.get()).toList());
 
         l.forEach(c -> {
             var m2 = c.getAuthors().stream().
-                    collect(groupingBy(a -> a.getName(), () -> new LinkedHashMap<>(), reducing((a, b) -> {
+                    collect(groupingBy(a -> a.getName(), LinkedHashMap::new, reducing((a, b) -> {
                         a.getPosts().addAll(b.getPosts());
                         return a;
-                    }) ));
+                    })));
             c.setAuthors(m2.values().stream().map(o -> o.get()).toList());
         });
-        printList(l);
-        System.out.println("3=======================================");
 
         return l;
     }

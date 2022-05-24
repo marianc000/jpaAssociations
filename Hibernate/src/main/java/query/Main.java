@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         DriverManager.setLogStream(System.out);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AuthorsPU");
         EntityManager em = emf.createEntityManager();
 
         System.out.println("====================SELECT e FROM Country e======================================");

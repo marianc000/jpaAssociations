@@ -6,12 +6,9 @@ package query.db;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Order;
 import static query.db.Db.getAllCountries;
 
-/**
- *
- * @author marian
- */
 public class DbTest {
     
  

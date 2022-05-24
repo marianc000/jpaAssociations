@@ -31,7 +31,7 @@ public class CountryTest {
 
     @BeforeAll
     public static void setUpClass() {
-        em = Persistence.createEntityManagerFactory("EmployeeService").createEntityManager();
+        em = Persistence.createEntityManagerFactory("AuthorsPU").createEntityManager();
     }
 
     @AfterAll

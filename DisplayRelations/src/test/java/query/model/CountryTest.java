@@ -16,7 +16,7 @@ import static query.db.Db.entityManager;
 
 import static query.model.CommonTest.accessFields;
  
-
+ 
 @TestMethodOrder(MethodName.class)
 public class CountryTest {
 

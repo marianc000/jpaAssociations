@@ -8,12 +8,10 @@ import java.sql.SQLException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Order;
 import query.model.Country;
 
-/**
- *
- * @author marian
- */
+@Order(Integer.MAX_VALUE)
 public class DbJdbcTest {
 
     DbJdbc i = new DbJdbc();
@@ -22,8 +20,9 @@ public class DbJdbcTest {
         l.forEach(o -> System.out.println(o));
     }
 
-    //   @Test
+       @Test
     public void testload() throws SQLException {
+         
         List<Country> l = i.load();
      //   printList(l);
 

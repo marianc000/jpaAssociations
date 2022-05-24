@@ -9,7 +9,7 @@ import query.model.access.GetAuthors;
 public class CommonTest {
 
     static EntityManager entityManager() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AuthorsPU");
         return emf.createEntityManager();
     }
 
