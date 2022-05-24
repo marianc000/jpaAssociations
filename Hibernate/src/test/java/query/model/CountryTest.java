@@ -5,22 +5,18 @@
 package query.model;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 import java.util.List;
 import org.hibernate.loader.MultipleBagFetchException;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.MethodName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static query.model.CommonTest.accessFields;
-import static query.model.CommonTest.entityManager;
 import query.model.access.GetAuthors;
 
 @TestMethodOrder(MethodName.class)
@@ -28,9 +24,14 @@ public class CountryTest {
 
     static EntityManager em;
 
+    static void accessFields(List<? extends GetAuthors> l) {
+        System.out.println("total countries " + l.size());
+        l.forEach(c -> c.getAuthors().forEach(d -> d.getPosts().forEach(e -> e.toString())));
+    }
+
     @BeforeAll
     public static void setUpClass() {
-        em = entityManager();
+        em = Persistence.createEntityManagerFactory("EmployeeService").createEntityManager();
     }
 
     @AfterAll
@@ -40,13 +41,7 @@ public class CountryTest {
 
     @BeforeEach
     public void setUp() {
-
         em.clear();
-    }
-
-    @AfterEach
-    public void tearDown() {
-
     }
 
     @Test
@@ -130,4 +125,10 @@ public class CountryTest {
         accessFields(l);
     }
 
+    @Test
+    public void test11() {
+        List< FetchModeCountry> l = em.createQuery("SELECT c FROM FetchModeCountry c", FetchModeCountry.class).getResultList();
+        accessFields(l);
+    }
+//
 }

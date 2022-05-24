@@ -1,36 +1,33 @@
 package query.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
-
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import query.model.access.GetAuthors;
 
 @Entity
-
+ 
 @Table(name = "COUNTRY")
-public class Country implements GetAuthors {
+public class FetchModeCountry implements GetAuthors {
 
     @Id
     private int id;
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "COUNTRY_ID")
-    private List<Author> authors = new LinkedList<>();
+    @Fetch(FetchMode.JOIN)
+    private List<FetchModeAuthor> authors = new LinkedList<>();
 
-    public Country() {
+    public FetchModeCountry() {
 
-    }
-
-    public Country(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public int getId() {
@@ -41,19 +38,18 @@ public class Country implements GetAuthors {
         return name;
     }
 
-    public List<Author> getAuthors() {
+    public List<FetchModeAuthor> getAuthors() {
         return authors;
     }
 
     @Override
     public String toString() {
-        return "{id:" + id + ", name: '" + name
-                + "', authors: [" + authors.stream().map(a -> a.toString()).collect(Collectors.joining(",")) + "]}";
+        return "Country{" + "id=" + id + ", name=" + name + ", authors=" + authors.size() + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        Country other = (Country) o;
+        FetchModeCountry other = (FetchModeCountry) o;
         return getId() == other.getId();
     }
 

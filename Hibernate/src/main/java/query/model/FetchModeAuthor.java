@@ -1,34 +1,32 @@
 package query.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import query.model.access.GetPosts;
 
 @Entity
 @Table(name = "AUTHOR")
-public class Author implements GetPosts {
+public class FetchModeAuthor implements GetPosts {
 
     @Id
     private int id;
     private String name;
- 
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUTHOR_ID")
-    private List< Post> posts = new LinkedList<>();
- 
-    public Author() {
+    @Fetch(FetchMode.JOIN)
+    private List< FetchModePost> posts = new LinkedList<>();
 
-    }
+    public FetchModeAuthor() {
 
-    public Author(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public int getId() {
@@ -39,13 +37,13 @@ public class Author implements GetPosts {
         return name;
     }
 
-    public List<Post> getPosts() {
+    public List<FetchModePost> getPosts() {
         return posts;
     }
 
     @Override
     public boolean equals(Object o) {
-        Author other = (Author) o;
+        FetchModeAuthor other = (FetchModeAuthor) o;
         return getId() == other.getId();
     }
 
@@ -56,7 +54,6 @@ public class Author implements GetPosts {
 
     @Override
     public String toString() {
-        return  "{ id:" + id + ", name:'" + name + "', posts: [" 
-                + posts.stream().map(a->a.toString()).collect(Collectors.joining(",")) + "]}";
+        return "Author{" + "id=" + id + ", name=" + name + ", posts=" + posts.size() + '}';
     }
 }

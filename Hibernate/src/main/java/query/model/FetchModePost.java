@@ -7,19 +7,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "POST")
-public class Post {
+public class FetchModePost {
 
     @Id
     private int id;
     private String name;
  
-    public Post() {
+    public FetchModePost() {
 
-    }
-
-    public Post(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public int getId() {
@@ -33,12 +28,12 @@ public class Post {
  
     @Override
     public String toString() {
-        return "{id:" + id + ", name:'" + name  + "'}";
+        return "Post{" + "id=" + id + ", name=" + name  + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        Post other = (Post) o;
+        FetchModePost other = (FetchModePost) o;
         return getId() == other.getId();
     }
 
