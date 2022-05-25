@@ -9,23 +9,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import query.model.access.GetAuthors;
-
 @Entity
-
 @Table(name = "COUNTRY")
-public class Country implements GetAuthors {
+public class Country {
 
     @Id
-    private int id;
-    private String name;
+    int id;
+    String name;
 
     @OneToMany
     @JoinColumn(name = "COUNTRY_ID")
-    private List<Author> authors = new LinkedList<>();
+    List<Author> authors = new LinkedList<>();
 
     public Country() {
-
     }
 
     public Country(int id, String name) {
@@ -54,15 +50,5 @@ public class Country implements GetAuthors {
         return "{id:" + id + ", name: '" + name
                 + "', authors: [" + authors.stream().map(a -> a.toString()).collect(Collectors.joining(",")) + "]}";
     }
-
-    @Override
-    public boolean equals(Object o) {
-        Country other = (Country) o;
-        return getId() == other.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return getId();
-    }
+ 
 }

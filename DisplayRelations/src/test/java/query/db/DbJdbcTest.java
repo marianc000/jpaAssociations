@@ -4,10 +4,12 @@
  */
 package query.db;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 import java.sql.SQLException;
 import java.util.List;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Order;
 import query.model.Country;
 
@@ -15,26 +17,27 @@ import query.model.Country;
 public class DbJdbcTest {
 
     DbJdbc i = new DbJdbc();
+    // to create the database
+    static EntityManager em = Persistence.createEntityManagerFactory("AuthorsPU").createEntityManager();
+
+    @AfterAll
+    static void afterAll() {
+        em.getEntityManagerFactory().close();
+    }
 
     void printList(List l) {
         l.forEach(o -> System.out.println(o));
     }
 
-       @Test
+    @Test
     public void testload() throws SQLException {
-         
         List<Country> l = i.load();
-     //   printList(l);
-
     }
 
     @Test
     public void testgroup() throws SQLException {
         List<Country> l = i.load();
-    //    printList(l);
-     
         l = i.group(l);
-  //      printList(l);
-
+        printList(l);
     }
 }

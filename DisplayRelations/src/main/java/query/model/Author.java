@@ -8,19 +8,19 @@ import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import query.model.access.GetPosts;
+ 
 
 @Entity
 @Table(name = "AUTHOR")
-public class Author implements GetPosts {
+public class Author   {
 
     @Id
-    private int id;
-    private String name;
+    int id;
+    String name;
  
     @OneToMany
     @JoinColumn(name = "AUTHOR_ID")
-    private List< Post> posts = new LinkedList<>();
+    List< Post> posts = new LinkedList<>();
  
     public Author() {
 
@@ -41,17 +41,6 @@ public class Author implements GetPosts {
 
     public List<Post> getPosts() {
         return posts;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        Author other = (Author) o;
-        return getId() == other.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return getId();
     }
 
     @Override

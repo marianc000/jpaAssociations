@@ -10,8 +10,8 @@ import jakarta.persistence.Table;
 public class Post {
 
     @Id
-    private int id;
-    private String name;
+    int id;
+    String name;
  
     public Post() {
 
@@ -34,16 +34,5 @@ public class Post {
     @Override
     public String toString() {
         return "{id:" + id + ", name:'" + name  + "'}";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        Post other = (Post) o;
-        return getId() == other.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return getId();
     }
 }
