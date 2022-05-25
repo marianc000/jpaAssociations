@@ -6,10 +6,16 @@
         <artifactId>LoadAssociations</artifactId>
         <version>1.0</version>
     </parent>
-    <groupId>sample.queries.eclipselink</groupId>
-    <artifactId>EclipseLink</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <properties>
-        <exec.mainClass>sample.queries.eclipselink.EclipseLink</exec.mainClass>
-    </properties>
+    <artifactId>LoadRelationsEclipselink</artifactId>
+ 
+    <dependencies>
+      <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>3.1.0-M1</version>
+        </dependency>
+  
+    </dependencies>
+    
+ 
 </project>

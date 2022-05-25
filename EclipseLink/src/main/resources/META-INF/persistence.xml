@@ -4,11 +4,11 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.1">
-    <persistence-unit name="AuthorsPU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="EL_PU" transaction-type="RESOURCE_LOCAL">
            
-        <class>query.model.Post</class>
-        <class>query.model.Country</class>
-        <class>query.model.Author</class>
+        <class>el.model.Post</class>
+        <class>el.model.Country</class>
+        <class>el.model.Author</class>
         <shared-cache-mode>NONE</shared-cache-mode>
         <validation-mode>NONE</validation-mode>
      
