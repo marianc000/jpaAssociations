@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package query.model;
+package hib.db;
 
+import hib.model.FetchModeCountry;
+import hib.model.CountrySet;
+import hib.model.EagerCountry;
+import hib.model.Country;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import java.util.List;
@@ -17,10 +21,10 @@ import org.junit.jupiter.api.MethodOrderer.MethodName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import query.model.access.GetAuthors;
+import hib.model.access.GetAuthors;
 
 @TestMethodOrder(MethodName.class)
-public class CountryTest {
+public class DbTest {
 
     static EntityManager em;
 
@@ -31,7 +35,7 @@ public class CountryTest {
 
     @BeforeAll
     public static void setUpClass() {
-        em = Persistence.createEntityManagerFactory("AuthorsPU").createEntityManager();
+        em = Persistence.createEntityManagerFactory("H_PU").createEntityManager();
     }
 
     @AfterAll
@@ -93,7 +97,8 @@ public class CountryTest {
 
     @Test
     public void test7() {
-        List< CountrySet> l = em.createQuery("SELECT c FROM  CountrySet c LEFT JOIN FETCH c.authors d LEFT JOIN FETCH d.posts", CountrySet.class).getResultList();
+        List< CountrySet> l = em.createQuery("SELECT c FROM  CountrySet c LEFT JOIN FETCH c.authors a LEFT JOIN FETCH a.posts p"
+                + " order by c.name,a.name,p.name", CountrySet.class).getResultList();
         accessFields(l);
     }
 //

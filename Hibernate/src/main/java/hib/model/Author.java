@@ -1,29 +1,27 @@
-package query.model;
+package hib.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
-import query.model.access.GetPosts;
+import hib.model.access.GetPosts;
 
 @Entity
 @Table(name = "AUTHOR")
-public class EagerAuthor implements GetPosts {
+public class Author implements GetPosts {
 
     @Id
     private int id;
     private String name;
-
-    @OneToMany(fetch = FetchType.EAGER)
+ 
+    @OneToMany
     @JoinColumn(name = "AUTHOR_ID")
-    private List< EagerPost> posts = new LinkedList<>();
-
-    public EagerAuthor() {
+    private List< Post> posts = new LinkedList<>();
+ 
+    public Author() {
 
     }
 
@@ -35,7 +33,7 @@ public class EagerAuthor implements GetPosts {
         return name;
     }
 
-    public List<EagerPost> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 

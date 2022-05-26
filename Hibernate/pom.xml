@@ -15,14 +15,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.0.0.Final</version>
         </dependency>
-     
-         <dependency>
-            <groupId>custom.junit5</groupId>
-            <artifactId>TestMethodNames</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-      
     </dependencies>
     
 </project>

@@ -1,4 +1,4 @@
-package query.model;
+package hib.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,7 +10,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import query.model.access.GetAuthors;
+import hib.model.access.GetAuthors;
+import java.util.stream.Collectors;
 
 @Entity
 @NamedEntityGraph(name = "CountrySet",
@@ -37,10 +38,9 @@ public class CountrySet implements GetAuthors {
 
     @OneToMany
     @JoinColumn(name = "COUNTRY_ID")
-    private Set<AuthorSet> authors = new LinkedHashSet<>();
+    private Set<AuthorSet> authors ;
 
     public CountrySet() {
-
     }
 
     public int getId() {
@@ -57,7 +57,8 @@ public class CountrySet implements GetAuthors {
 
     @Override
     public String toString() {
-        return "Country{" + "id=" + id + ", name=" + name + ", authors=" + authors.size() + '}';
+        return "{id:" + id + ", name: '" + name
+                + "', authors: [" + authors.stream().map(a -> a.toString()).collect(Collectors.joining(",")) + "]}";
     }
 
     @Override

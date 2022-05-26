@@ -1,19 +1,19 @@
-package query.model;
-
+package hib.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "POST")
-public class FetchModePost {
+public class EagerPost {
 
     @Id
     private int id;
     private String name;
- 
-    public FetchModePost() {
+
+    public EagerPost() {
 
     }
 
@@ -24,16 +24,15 @@ public class FetchModePost {
     public String getName() {
         return name;
     }
- 
- 
+
     @Override
     public String toString() {
-        return "Post{" + "id=" + id + ", name=" + name  + '}';
+        return "Post{" + "id=" + id + ", name=" + name + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        FetchModePost other = (FetchModePost) o;
+        Post other = (Post) o;
         return getId() == other.getId();
     }
 

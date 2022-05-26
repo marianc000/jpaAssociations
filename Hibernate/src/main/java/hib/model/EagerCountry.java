@@ -1,4 +1,4 @@
-package query.model;
+package hib.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,14 +8,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import query.model.access.GetAuthors;
+import hib.model.access.GetAuthors;
 
 @Entity
- 
+
 @Table(name = "COUNTRY")
-public class FetchModeCountry implements GetAuthors {
+public class EagerCountry implements GetAuthors {
 
     @Id
     private int id;
@@ -23,10 +21,9 @@ public class FetchModeCountry implements GetAuthors {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "COUNTRY_ID")
-    @Fetch(FetchMode.JOIN)
-    private List<FetchModeAuthor> authors = new LinkedList<>();
+    private List<EagerAuthor> authors = new LinkedList<>();
 
-    public FetchModeCountry() {
+    public EagerCountry() {
 
     }
 
@@ -38,7 +35,7 @@ public class FetchModeCountry implements GetAuthors {
         return name;
     }
 
-    public List<FetchModeAuthor> getAuthors() {
+    public List<EagerAuthor> getAuthors() {
         return authors;
     }
 
@@ -49,7 +46,7 @@ public class FetchModeCountry implements GetAuthors {
 
     @Override
     public boolean equals(Object o) {
-        FetchModeCountry other = (FetchModeCountry) o;
+        Country other = (Country) o;
         return getId() == other.getId();
     }
 

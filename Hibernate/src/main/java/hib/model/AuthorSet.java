@@ -1,4 +1,4 @@
-package query.model;
+package hib.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,7 +7,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import query.model.access.GetPosts;
+import hib.model.access.GetPosts;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "AUTHOR")
@@ -50,6 +51,7 @@ public class AuthorSet implements GetPosts {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name + ", posts=" + posts.size() + '}';
+        return  "{ id:" + id + ", name:'" + name + "', posts: [" 
+                + posts.stream().map(a->a.toString()).collect(Collectors.joining(",")) + "]}";
     }
 }

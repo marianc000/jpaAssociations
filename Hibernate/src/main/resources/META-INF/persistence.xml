@@ -4,7 +4,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.1">
-    <persistence-unit name="AuthorsPU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="H_PU" transaction-type="RESOURCE_LOCAL">
            
  
         <shared-cache-mode>NONE</shared-cache-mode>
@@ -16,13 +16,13 @@
             <property name="jakarta.persistence.jdbc.user" value="APP"/>
             <property name="jakarta.persistence.jdbc.password" value="APP"/>-->
          <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
            
             <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
             <property name="jakarta.persistence.schema-generation.drop-source" value="script"/>
-            <property name="jakarta.persistence.schema-generation.create-script-source" value="src/main/resources/create.sql"/>
-            <property name="jakarta.persistence.schema-generation.drop-script-source" value="src/main/resources/drop.sql"/>
+            <property name="jakarta.persistence.schema-generation.create-script-source" value="create.sql"/>
+            <property name="jakarta.persistence.schema-generation.drop-script-source" value="drop.sql"/>
   
             <property name="jakarta.persistence.sql-load-script-source" value="db.sql" />
      

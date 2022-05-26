@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package query.model.access;
+package hib.model.access;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author marian
  */
-public interface GetAuthors {
+public interface GetPosts {
 
-    Collection<? extends GetPosts> getAuthors();
+    Collection getPosts();
 }

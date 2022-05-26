@@ -1,4 +1,4 @@
-package query.model;
+package hib.model;
 
 
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package query.model;
+package hib.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityResult;
@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.annotations.NamedNativeQuery;
-import query.model.access.GetAuthors;
+import hib.model.access.GetAuthors;
 
 @Entity
 

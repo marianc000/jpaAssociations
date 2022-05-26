@@ -1,4 +1,4 @@
-package query.model;
+package hib.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,22 +10,23 @@ import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import query.model.access.GetPosts;
+import hib.model.access.GetAuthors;
 
 @Entity
-@Table(name = "AUTHOR")
-public class FetchModeAuthor implements GetPosts {
+ 
+@Table(name = "COUNTRY")
+public class FetchModeCountry implements GetAuthors {
 
     @Id
     private int id;
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "AUTHOR_ID")
+    @JoinColumn(name = "COUNTRY_ID")
     @Fetch(FetchMode.JOIN)
-    private List< FetchModePost> posts = new LinkedList<>();
+    private List<FetchModeAuthor> authors = new LinkedList<>();
 
-    public FetchModeAuthor() {
+    public FetchModeCountry() {
 
     }
 
@@ -37,23 +38,23 @@ public class FetchModeAuthor implements GetPosts {
         return name;
     }
 
-    public List<FetchModePost> getPosts() {
-        return posts;
+    public List<FetchModeAuthor> getAuthors() {
+        return authors;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" + "id=" + id + ", name=" + name + ", authors=" + authors.size() + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        FetchModeAuthor other = (FetchModeAuthor) o;
+        FetchModeCountry other = (FetchModeCountry) o;
         return getId() == other.getId();
     }
 
     @Override
     public int hashCode() {
         return getId();
-    }
-
-    @Override
-    public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name + ", posts=" + posts.size() + '}';
     }
 }
