@@ -23,7 +23,7 @@ public class FetchModeAuthor implements GetPosts {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUTHOR_ID")
     @Fetch(FetchMode.JOIN)
-    private List< FetchModePost> posts = new LinkedList<>();
+    private List< FetchModePost> posts;
 
     public FetchModeAuthor() {
 

@@ -9,6 +9,8 @@ import el.model.Country;
 
 public class Db {
 
+    
+    
     public static List<Country> getAllCountries(EntityManager em) {
         return em.createQuery("SELECT c FROM Country c left join c.authors a left join a.posts p "
                 + " order by c.name,a.name,p.name", Country.class)

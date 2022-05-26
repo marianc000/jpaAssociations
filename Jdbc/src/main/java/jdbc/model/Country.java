@@ -1,25 +1,15 @@
-package el.model;
+package jdbc.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Entity
-@Table(name = "COUNTRY")
 public class Country {
 
-    @Id
     int id;
     String name;
 
-    @OneToMany
-    @JoinColumn(name = "COUNTRY_ID")
-    List<Author> authors;
+    List<Author> authors = new LinkedList<>();
 
     public Country() {
     }
@@ -50,5 +40,4 @@ public class Country {
         return "{id:" + id + ", name: '" + name
                 + "', authors: [" + authors.stream().map(a -> a.toString()).collect(Collectors.joining(",")) + "]}";
     }
- 
 }

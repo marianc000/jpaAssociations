@@ -20,7 +20,7 @@ public class AuthorSet implements GetPosts {
 
     @OneToMany
     @JoinColumn(name = "AUTHOR_ID")
-    private Set< PostSet> posts = new LinkedHashSet<>();
+    private Set< PostSet> posts;
 
     public AuthorSet() {
 

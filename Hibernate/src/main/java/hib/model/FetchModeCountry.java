@@ -24,7 +24,7 @@ public class FetchModeCountry implements GetAuthors {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "COUNTRY_ID")
     @Fetch(FetchMode.JOIN)
-    private List<FetchModeAuthor> authors = new LinkedList<>();
+    private List<FetchModeAuthor> authors;
 
     public FetchModeCountry() {
 

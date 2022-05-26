@@ -19,7 +19,7 @@ public class Author implements GetPosts {
  
     @OneToMany
     @JoinColumn(name = "AUTHOR_ID")
-    private List< Post> posts = new LinkedList<>();
+    private List< Post> posts;
  
     public Author() {
 

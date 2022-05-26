@@ -21,7 +21,7 @@ public class EagerAuthor implements GetPosts {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUTHOR_ID")
-    private List< EagerPost> posts = new LinkedList<>();
+    private List< EagerPost> posts;
 
     public EagerAuthor() {
 

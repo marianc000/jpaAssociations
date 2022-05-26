@@ -71,7 +71,7 @@ public class Country implements GetAuthors {
 
     @OneToMany
     @JoinColumn(name = "COUNTRY_ID")
-    private List<Author> authors = new LinkedList<>();
+    private List<Author> authors;
 
     public Country() {
 

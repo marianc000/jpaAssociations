@@ -20,7 +20,7 @@ public class Author   {
  
     @OneToMany
     @JoinColumn(name = "AUTHOR_ID")
-    List< Post> posts = new LinkedList<>();
+    List< Post> posts;
  
     public Author() {
 

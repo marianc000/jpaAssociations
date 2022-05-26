@@ -21,7 +21,7 @@ public class EagerCountry implements GetAuthors {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "COUNTRY_ID")
-    private List<EagerAuthor> authors = new LinkedList<>();
+    private List<EagerAuthor> authors;
 
     public EagerCountry() {
 
