@@ -15,18 +15,23 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.reducing;
 
-public class Db  {
+public class Db {
 
     public static String getCountriesJSObjectWithJdbc() throws SQLException {
         return group(load()).stream().map(c -> c.toString())
                 .collect(Collectors.joining(",", "[", "]"));
     }
 
+    static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection("jdbc:h2:mem:test");
+    }
+
     static List<Country> load() throws SQLException {
-        try ( Connection con = DriverManager.getConnection("jdbc:h2:mem:test");  Statement st = con.createStatement();  ResultSet rs = st
-                .executeQuery("SELECT c.ID, c.NAME, a.ID, a.NAME, p.ID, p.NAME FROM COUNTRY c"
-                        + " LEFT OUTER JOIN AUTHOR a ON (a.COUNTRY_ID = c.ID) LEFT OUTER JOIN POST p ON (p.AUTHOR_ID = a.ID)"
-                        + " order by c.name,a.name,p.name")) {
+        try ( Connection con = getConnection();  
+                Statement st = con.createStatement();  
+                ResultSet rs = st.executeQuery("SELECT c.ID, c.NAME, a.ID, a.NAME, p.ID, p.NAME FROM COUNTRY c"
+                + " LEFT OUTER JOIN AUTHOR a ON (a.COUNTRY_ID = c.ID) LEFT OUTER JOIN POST p ON (p.AUTHOR_ID = a.ID)"
+                + " order by c.name,a.name,p.name")) {
             List<Country> l = new LinkedList<>();
             while (rs.next()) {
                 Country c = new Country(rs.getInt(1), rs.getString(2));
@@ -40,23 +45,24 @@ public class Db  {
     }
 
     static List<Country> group(List<Country> l) {
-        var m = l.stream()
-                .collect(groupingBy(c -> c.getName(), LinkedHashMap::new,
+        var map = l.stream()
+                .collect(groupingBy(c -> c.getId(), LinkedHashMap::new,
                         reducing((a, b) -> {
                             a.getAuthors().addAll(b.getAuthors());
                             return a;
                         })
                 ));
-
-        l = new LinkedList<>(m.values().stream().map(o -> o.get()).toList());
+        // get rid of annoying Optional<Country>
+        l = new LinkedList<>(map.values().stream().map(o -> o.get()).toList());
 
         l.forEach(c -> {
-            var m2 = c.getAuthors().stream().
-                    collect(groupingBy(a -> a.getName(), LinkedHashMap::new, reducing((a, b) -> {
+            var map2 = c.getAuthors().stream().
+                    collect(groupingBy(a -> a.getId(), LinkedHashMap::new, reducing((a, b) -> {
                         a.getPosts().addAll(b.getPosts());
                         return a;
                     })));
-            c.setAuthors(m2.values().stream().map(o -> o.get()).toList());
+            // get rid of Optional<Author>
+            c.setAuthors(map2.values().stream().map(o -> o.get()).toList());
         });
 
         return l;
