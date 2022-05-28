@@ -40,7 +40,7 @@ import hib.model.access.GetAuthors;
                         @FieldResult(name = "id", column = "aid"),
                         @FieldResult(name = "name", column = "aname")
                     }),
-            @EntityResult(entityClass =  Post.class,
+            @EntityResult(entityClass = Post.class,
                     fields = {
                         @FieldResult(name = "id", column = "pid"),
                         @FieldResult(name = "name", column = "pname")

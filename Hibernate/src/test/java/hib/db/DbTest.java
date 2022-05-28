@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package hib.db;
 
 import hib.model.FetchModeCountry;
@@ -24,7 +20,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import hib.model.access.GetAuthors;
 
 @TestMethodOrder(MethodName.class)
-public class DbTest {
+class DbTest {
 
     static EntityManager em;
 
@@ -34,88 +30,25 @@ public class DbTest {
     }
 
     @BeforeAll
-    public static void setUpClass() {
+    static void setUpClass() {
         em = Persistence.createEntityManagerFactory("H_PU").createEntityManager();
     }
 
     @AfterAll
-    public static void tearDownClass() {
+    static void tearDownClass() {
         em.getEntityManagerFactory().close();
     }
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         em.clear();
     }
 
     @Test
-    public void test1() {
-        List< Country> l = em.createQuery("SELECT e FROM Country e", Country.class).getResultList();
-        accessFields(l);
-    }
-//
-
-    @Test
-    public void test2() {
-        List< EagerCountry> l = em.createQuery("SELECT e FROM EagerCountry e", EagerCountry.class).getResultList();
-        accessFields(l);
-    }
-//
-
-    @Test
-    public void test3() {
-        List< Country> l = em.createQuery("SELECT c FROM Country c left join c.authors d left join d.posts e", Country.class).getResultList();
-        accessFields(l);
-    }
-//
-
-    @Test
-    public void test4() {
-        List< EagerCountry> l = em.createQuery("SELECT c FROM EagerCountry c left join c.authors d left join d.posts e", EagerCountry.class).getResultList();
-        accessFields(l);
-    }
-//
-
-    @Test
-    public void test5() {
+    void test3() {
         Exception ex = assertThrows(Exception.class, () -> {
-            List<Country> l = em.createQuery("SELECT c FROM Country c LEFT JOIN FETCH c.authors d LEFT JOIN FETCH d.posts", Country.class).getResultList();
-            accessFields(l);
-        });
-        assertEquals(ex.getCause().getClass(), MultipleBagFetchException.class);
-    }
-
-    @Test
-    public void test6() {
-        Exception ex = assertThrows(Exception.class, () -> {
-            List<EagerCountry> l = em.createQuery("SELECT c FROM EagerCountry c LEFT JOIN FETCH c.authors d LEFT JOIN FETCH d.posts", EagerCountry.class).getResultList();
-            accessFields(l);
-        });
-        assertEquals(ex.getCause().getClass(), MultipleBagFetchException.class);
-    }
-//
-
-    @Test
-    public void test7() {
-        List< CountrySet> l = em.createQuery("SELECT c FROM  CountrySet c LEFT JOIN FETCH c.authors a LEFT JOIN FETCH a.posts p"
-                + " order by c.name,a.name,p.name", CountrySet.class).getResultList();
-        accessFields(l);
-    }
-//
-
-    @Test
-    public void test8() {
-
-        List<Object[]> l = em.createNamedQuery("native").getResultList();
-        List<GetAuthors> l2 = l.stream().map(a -> (GetAuthors) a[0]).toList();
-        accessFields(l2);
-    }
-
-    @Test
-    public void test9() {
-        Exception ex = assertThrows(Exception.class, () -> {
-            List<Country> l = em.createQuery("SELECT c FROM Country c", Country.class)
-                    .setHint("jakarta.persistence.loadgraph", em.getEntityGraph("Country"))
+            List<Country> l = em.createQuery("SELECT c FROM Country c LEFT JOIN FETCH c.authors a LEFT JOIN FETCH a.posts p"
+                    + " order by c.name,a.name,p.name", Country.class)
                     .getResultList();
             accessFields(l);
         });
@@ -123,15 +56,81 @@ public class DbTest {
     }
 
     @Test
-    public void test10() {
+    void test31() {
+        Exception ex = assertThrows(Exception.class, () -> {
+            List<EagerCountry> l = em.createQuery("SELECT c FROM EagerCountry c LEFT JOIN FETCH c.authors a LEFT JOIN FETCH a.posts p"
+                    + " order by c.name,a.name,p.name", EagerCountry.class)
+                    .getResultList();
+            accessFields(l);
+        });
+        assertEquals(ex.getCause().getClass(), MultipleBagFetchException.class);
+    }
+
+    @Test
+    void test4() {
+        List<CountrySet> l = em.createQuery("SELECT c FROM  CountrySet c LEFT JOIN FETCH c.authors a LEFT JOIN FETCH a.posts p"
+                + " order by c.name,a.name,p.name", CountrySet.class)
+                .getResultList();
+        accessFields(l);
+    }
+
+    @Test
+    void test5() {
+     Exception ex = assertThrows(Exception.class, () -> {
+        List<Country> l = em.createQuery("SELECT c FROM Country c", Country.class)
+                .setHint("jakarta.persistence.loadgraph", em.getEntityGraph("Country"))
+                .getResultList();
+        accessFields(l);
+           });
+        assertEquals(ex.getCause().getClass(), MultipleBagFetchException.class);
+    }
+
+    @Test
+    void test51() {
         List<CountrySet> l = em.createQuery("SELECT c FROM Country c", CountrySet.class)
                 .setHint("jakarta.persistence.loadgraph", em.getEntityGraph("CountrySet"))
                 .getResultList();
         accessFields(l);
     }
 
+    // no difference between eager and lazy
     @Test
-    public void test11() {
+    void test6() {
+        List< Country> l = em.createQuery("SELECT e FROM Country e", Country.class).getResultList();
+        accessFields(l);
+    }
+
+    @Test
+    void test7() {
+        List< EagerCountry> l = em.createQuery("SELECT e FROM EagerCountry e", EagerCountry.class)
+                .getResultList();
+        accessFields(l);
+    }
+//
+
+    @Test
+    void test8() {
+        List< Country> l = em.createQuery("SELECT c FROM Country c left join c.authors a left join a.posts p", Country.class)
+                .getResultList();
+        accessFields(l);
+    }
+//
+
+    @Test
+    void test9() {
+        List< EagerCountry> l = em.createQuery("SELECT c FROM EagerCountry c left join c.authors d left join d.posts e", EagerCountry.class).getResultList();
+        accessFields(l);
+    }
+//
+    @Test
+    void test10() {
+        List<Object[]> l = em.createNamedQuery("native").getResultList();
+        List<GetAuthors> l2 = l.stream().map(a -> (GetAuthors) a[0]).toList();
+        accessFields(l2);
+    }
+
+    @Test
+    void test11() {
         List< FetchModeCountry> l = em.createQuery("SELECT c FROM FetchModeCountry c", FetchModeCountry.class).getResultList();
         accessFields(l);
     }

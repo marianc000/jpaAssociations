@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.LinkedList;
 import java.util.List;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -23,7 +22,7 @@ public class FetchModeAuthor implements GetPosts {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "AUTHOR_ID")
     @Fetch(FetchMode.JOIN)
-    private List< FetchModePost> posts;
+    private List<  Post> posts;
 
     public FetchModeAuthor() {
 
@@ -37,7 +36,7 @@ public class FetchModeAuthor implements GetPosts {
         return name;
     }
 
-    public List<FetchModePost> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 

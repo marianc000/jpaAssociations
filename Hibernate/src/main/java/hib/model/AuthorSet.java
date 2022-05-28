@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import hib.model.access.GetPosts;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class AuthorSet implements GetPosts {
 
     @OneToMany
     @JoinColumn(name = "AUTHOR_ID")
-    private Set< PostSet> posts;
+    private Set<Post> posts;
 
     public AuthorSet() {
 
@@ -34,7 +33,7 @@ public class AuthorSet implements GetPosts {
         return name;
     }
 
-    public Set<PostSet> getPosts() {
+    public Set<Post> getPosts() {
         return posts;
     }
 
@@ -51,7 +50,7 @@ public class AuthorSet implements GetPosts {
 
     @Override
     public String toString() {
-        return  "{ id:" + id + ", name:'" + name + "', posts: [" 
-                + posts.stream().map(a->a.toString()).collect(Collectors.joining(",")) + "]}";
+        return "{ id:" + id + ", name:'" + name + "', posts: ["
+                + posts.stream().map(a -> a.toString()).collect(Collectors.joining(",")) + "]}";
     }
 }

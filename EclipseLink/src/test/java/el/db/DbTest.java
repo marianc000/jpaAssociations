@@ -27,23 +27,24 @@ public class DbTest {
     }
 
     @Test
-    public void test0() {
+    void test0() {
         List<Country> l = getAllCountries(em);
         accessFields(l);
     }
 
     @Test
-    public void test1() {
+    void test1() {
         List<Country> l = em.createQuery("SELECT c FROM Country c left join c.authors a left join a.posts p "
                 + " order by c.name,a.name,p.name", Country.class)
-                .setHint("eclipselink.left-join-fetch", "c.authors.posts").getResultList();
+                .getResultList();
         accessFields(l);
     }
 
     @Test
-    public void test2() {
-        List<Country> l = em.createQuery("SELECT c FROM Country c", Country.class)
-                .getResultList();
+    void test2() {
+        List<Country> l = em.createQuery("SELECT c FROM Country c left join c.authors a left join a.posts p "
+                + " order by c.name,a.name,p.name", Country.class)
+                .setHint("eclipselink.left-join-fetch", "c.authors.posts").getResultList();
         accessFields(l);
     }
 

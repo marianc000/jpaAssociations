@@ -51,21 +51,17 @@
 
 div#rootDiv {
     margin: 2em;
+    position: relative;
 }
 
 .table {
-    position: absolute;
-    top: 0;
+
+    display: inline-block;
+    margin-right: 1em;
 }
 
-.table.EclipseLink {
-    top: 1px;
-}
 
-.table.Jdbc {
-    top: 2px;
-}
-
-.table.Hibernate {
-    top: 3px;
+.caption {
+    font-size: 1.2em;
+    color: brown;
 }
