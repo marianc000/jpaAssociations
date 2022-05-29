@@ -1,4 +1,4 @@
-# Automatically create and fill pages in Confluence
-Import contents into Confluence through the user interface using a Puppeteer-controlled browser
+# Efficiently loading associations with JDBC, Hibernate and EclipseLink
+What is the best way to load relational data — JDBC or JPA?
 
-Sample code for my very exciting post https://marian-caikovski.medium.com/automatically-create-and-fill-pages-in-confluence-22fe0cb2359c about automatic creation of pages with tables in Confluence
+Sample code for my post https://marian-caikovski.medium.com/efficiently-loading-associations-with-jdbc-hibernate-and-eclipselink-20ee88584938 about transformation of relational data into Java classes
