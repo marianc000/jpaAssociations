@@ -30,7 +30,6 @@ public class Post {
         return name;
     }
  
- 
     @Override
     public String toString() {
         return "{id:" + id + ", name:'" + name  + "'}";

@@ -1,9 +1,5 @@
-<%-- Document : index Created on : May 20, 2022, 10:49:41 PM Author : marian --%>
-
-
 <%@page import="static hib.db.Db.getCountriesJSObjectWithHibernate" %>
 <%@page import="static jdbc.db.Db.getCountriesJSObjectWithJdbc" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
